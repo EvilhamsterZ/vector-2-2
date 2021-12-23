@@ -1,14 +1,46 @@
 # vector-2-2
 ## Visual Studio 2019
 VisualStudioVersion = 16.0.29519.181
-## Задача 1
-Функция поиска наибольшего элемента в массиве вектора
+## Задача 2
+Функция подсчета введенных элементов.
+вводится N размер вектора , вводится значение элементов вектора от 1 до 20 включительно.
 ### Код
 ```
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
+
+int ErrorofEnter()//проверка ввода от 1 до 20 для элементов вектора
+{
+    while (true)
+    {
+        int n;
+        std::cout << "Введите n-элемент вектора от 1 до 20 включительно" << std::endl;
+        std::cin >> n;
+        if ((n > 0)& (n < 21))
+            return(n);
+        else
+            std::cout << "Ошибка ввода" << std::endl;
+        std::cin.clear();
+        std::cin.ignore();
+    }
+}
+int ErrorofEnter1()//проверка ввода по верхней планке int
+{
+    while (true)
+    {
+        int n;
+        std::cout << "Введите n-размер вектора от 1 до 2147483647 включительно" << std::endl;
+        std::cin >> n;
+        if ((n > 0)& (n < 2147483648))
+            return(n);
+        else
+            std::cout << "Ошибка ввода" << std::endl;
+        std::cin.clear();
+        std::cin.ignore();
+    }
+}
 //1)
 void fill(std::vector<int> &v)
 {   
@@ -16,7 +48,7 @@ void fill(std::vector<int> &v)
     for (int i = 0; i < v.size(); i++)              //итак мой план очень прост
     {                                               //1)
         std::cout << "Введите элемент вектора: ";   //заполняем массив n элементов вектора
-        std::cin>> v[i];                            //2)
+        v[i]= ErrorofEnter();                            //2)
         if (v[i] > s)                               //расширяем вектор на 1 элемент больший макс введенного на 1, О(1) сложность
         {                                           //сортируем массив встроенной функцией вектора О(n) сложность
             s = v[i];                               //3)
@@ -47,7 +79,7 @@ int main()
 {
     setlocale(LC_ALL, "Rus");
     int n;
-    std::cin >> n;
+    n=ErrorofEnter1();
     std::vector<int> v(n);
     fill(v);
     print(v);
